@@ -48,7 +48,7 @@ class Gameboard {
             }
         }
 
-        //window.alert(this.m_testBoard); //for testing
+        window.alert(this.m_testBoard); //for testing
     }
 
     /**
