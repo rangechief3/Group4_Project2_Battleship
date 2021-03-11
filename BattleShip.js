@@ -396,10 +396,12 @@ class Player {
      * @description this creates each player
      * @param {number} numOfShips number of ships to played
      * @param {string} name name of the player
+     * @param {boolean} is_ai true if an ai
      */
-    constructor(numOfShips, name) {
+    constructor(numOfShips, name, is_ai) {
         this.m_name = name;
         this.m_numShips = numOfShips;
+        this.is_ai = is_ai;
         this.m_otherPlayerBoard = new Gameboard(this.m_numShips)
         this.m_fleet = new Array(this.m_numShips) //holds all the created ships
   
@@ -569,10 +571,11 @@ class Game {
     constructor() {
         let play1 = window.prompt("Player1, what is your name?: ")
         let play2 = "default"
+        let is_ai = false
         let against_ai = window.prompt("Play against an AI? (Y or N)")
         
         while (1) {
-            if (against_ai == 'Y' || against_ai == 'y' || against_ai == 'n' || against_ai == 'Y') {
+            if (against_ai == 'Y' || against_ai == 'y' || against_ai == 'n' || against_ai == 'N') {
                 break
             }
             against_ai = window.prompt("Invaid entry. Try again(Y/N): ")
@@ -585,6 +588,7 @@ class Game {
                 ai_difficulty = window.prompt("Invalid entry. Try again(1-3) ")
             }
             play2 = "Mr. Roboto"
+            is_ai = true
         }
         else {
             play2 = window.prompt("Player2, what is your name?: ")
@@ -600,14 +604,13 @@ class Game {
             numShips = window.prompt('\nYou gave an invalid amount of ships. Try again: ')
         }
 
-        let Player1 = new Player(numShips,play1)
-        let Player2 = new Player(numShips, play2)
-        console.log("I created the player classes")
+        let Player1 = new Player(numShips,play1, false)
+        let Player2 = new Player(numShips, play2, is_ai)
+
         Player1.setBattleShips(1)
         Player1.hideShips(1);
         Player2.setBattleShips(2)
         Player2.hideShips(2);
-        console.log("I should have allowed the users to enter their ships")
         //window.alert(Player1.m_otherPlayerBoard);
         //window.alert(Player2.m_otherPlayerBoard);
 
@@ -642,9 +645,11 @@ class Game {
 /**
  * @description event listener callback that makes sure the page is loaded before the game starts
  */
+
 window.addEventListener("load", () => {
-    let start = new Game();
+    let start = new Game()
 });
+
 
 //Game End Message
 
