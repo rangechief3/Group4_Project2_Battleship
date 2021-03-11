@@ -568,7 +568,28 @@ class Game {
      */
     constructor() {
         let play1 = window.prompt("Player1, what is your name?: ")
-        let play2 = window.prompt("Player2, what is your name?: ")
+        let play2 = "default"
+        let against_ai = window.prompt("Play against an AI? (Y or N)")
+        
+        while (1) {
+            if (against_ai == 'Y' || against_ai == 'y' || against_ai == 'n' || against_ai == 'Y') {
+                break
+            }
+            against_ai = window.prompt("Invaid entry. Try again(Y/N): ")
+        }
+        
+        if (against_ai == 'Y' || against_ai == 'y') {
+            let ai_difficulty = window.prompt("What difficulty?(1 = easy, 2 = medium, 3 = hard) ")
+
+            while(ai_difficulty < 1 || ai_difficulty > 3) {
+                ai_difficulty = window.prompt("Invalid entry. Try again(1-3) ")
+            }
+            play2 = "Mr. Roboto"
+        }
+        else {
+            play2 = window.prompt("Player2, what is your name?: ")
+        }
+        
         window.alert("Let's play BattleShip!\n")
         window.alert("Depending on how many ships you pick, the type of ships you have will differ. You can choose between 1 to 6 ships.\n")
         window.alert("If you choose 1 ship, you will get 1 ship of 1x1. If you choose 2 ships, you will get 1 ship that is 1x1 and another that is 1x2 and so on.\n")
@@ -581,12 +602,12 @@ class Game {
 
         let Player1 = new Player(numShips,play1)
         let Player2 = new Player(numShips, play2)
-
+        console.log("I created the player classes")
         Player1.setBattleShips(1)
         Player1.hideShips(1);
         Player2.setBattleShips(2)
         Player2.hideShips(2);
-
+        console.log("I should have allowed the users to enter their ships")
         //window.alert(Player1.m_otherPlayerBoard);
         //window.alert(Player2.m_otherPlayerBoard);
 
